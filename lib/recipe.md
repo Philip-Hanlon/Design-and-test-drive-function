@@ -4,100 +4,84 @@ Copy this into a `recipe.md` in your project and fill it out.
 
 ## 1. Describe the Problem
 
-_Put or write the user story here. Add any clarifying notes you might have._
+As a user
+So that I can keep track of my tasks
+I want to check if a text includes the string `#TODO`.
+
 
 ## 2. Design the Function Signature
 
-_Include the name of the function, its parameters, return value, and side effects._
+def task_tracker(text)
+...check if the string contains TODO
 
-```python
-# EXAMPLE
+`
+   
 
-def extract_uppercase(mixed_words):
-    """Extracts uppercase words from a string
+    Parameters:
+    
+     the string contains text
 
-    Parameters: (list all parameters and their types)
-        mixed_words: a string containing words (e.g. "hello WORLD")
-
-    Returns: (state the return value and its type)
-        a list of strings, each one a word (e.g. ["WORLD"])
+    Returns: 
+    a string to check foer presence of "TODO"
 
     Side effects: (state any side effects)
-        This function doesn't print anything or have any other side-effects
-    """
-    pass # Test-driving means _not_ writing any code here yet.
+
+    N/A
+
+
 ```
 
 ## 3. Create Examples as Tests
 
 _Make a list of examples of what the function will take and return._
 
-```python
-# EXAMPLE
+given a text containing "TODO
+tast_tracker ("this string contains "TODO")
+returns True
 
 """
-Given a lower and an uppercase word
-It returns a list with the uppercase word
+given a text does not  contain "TODO"
+tast_tracker ("this string doesnt contain "TODO")
+returns False
 """
-extract_uppercase("hello WORLD") => ["WORLD"]
+given a text in an emty string""
+task_tracker ("")
+returns Error message (This is an empty string)
 
 """
-Given two uppercase words
-It returns a list with both words
+given a value that isnt a string
+task_tracker (TODO1)
+returns error messager("a string must be provided")
 """
 extract_uppercase("HELLO WORLD") => ["HELLO", "WORLD"]
 
-"""
-Given two lowercase words
-It returns an empty list
-"""
-extract_uppercase("hello world") => []
-
-"""
-Given a lower and a mixed case word
-It returns an empty list
-"""
-extract_uppercase("hello WoRLD") => []
-
-"""
-Given a lowercase word and an uppercase word with an exclamation mark
-It returns a list with the uppercase word, no exclamation mark
-"""
-extract_uppercase("hello WORLD!") => ["WORLD"]
-
-"""
-Given an empty string
-It returns an empty list
-"""
-extract_uppercase("") => []
-
-"""
-Given a None value
-It throws an error
-"""
-extract_uppercase(None) throws an error
-```
-
-_Encode each example as a test. You can add to the above list as you go._
+ go._
 
 ## 4. Implement the Behaviour
 
-_After each test you write, follow the test-driving process of red, green, refactor to implement the behaviour._
+"""test to see if string contains the text TODO returns True"""
+def test_text_contains_todo():
+    result = task_tracker("This does contain TODO")
+    assert result == True  
 
-Here's an example for you to start with:
+"""test to see if string doesnt containsthe text TODO returns False"""      
 
-```python
-# EXAMPLE
+def test_text_doesnt_todo():
+    result = task_tracker("This doesnt contain the right text")
+    assert result == False       
 
-from lib.extract_uppercase import *
+"""test to return error message if empty string"""
 
-"""
-Given a lower and an uppercase word
-It returns a list with the uppercase word
-"""
-def test_extract_uppercase_with_upper_then_lower():
-    result = extract_uppercase("hello WORLD")
-    assert result == ["WORLD"]
-```
+def test_text_text_contains_empty_string():
+    with pytest.raises(Exception) as e:
+        task_tracker("")
+    error_message = str(e.value) 
+    assert error_message == "empty string provided"  
 
-Ensure all test function names are unique, otherwise pytest will ignore them!
+"""test to make sure a string is provided returns error message"""
+def test_text_non_string():
+    with pytest.raises(Exception) as e:
+        task_tracker(341)
+    error_message = str(e.value) 
+    assert error_message == "a string must be provided"      
+         
